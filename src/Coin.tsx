@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import styled from "styled-components";
 
@@ -38,10 +38,24 @@ function Coin() {
   const [isLoading, setIsLoading] = useState(true);
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
+  const [coinInfo, setCoinInfo] = useState({});
+  const [coinPrice, setCoinPrice] = useState({});
+  useEffect(() => {
+    (async () => {
+      const coinInfoData = await (
+        await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
+      ).json();
+      const coinPriceData = await (
+        await fetch(`https://api.coinpaprika.com/v1/tickers/${coiId}`)
+      ).json;
+      setCoinInfo(coinInfo);
+      setCoinPrice(coinPrice);
+    })();
+  }, []);
   return (
     <Container>
       <Header>
-        <CoinTitle>코인 {coinId}</CoinTitle>
+        <CoinTitle>{state?.name || "잘못된 접근입니다."}</CoinTitle>
       </Header>
       {isLoading ? <Loading>"코인을 불러오는중..."</Loading> : null}
     </Container>
