@@ -128,9 +128,9 @@ function Coin() {
       ).json();
       const coinPriceData = await (
         await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
-      ).json;
-      setCoinInfo(coinInfo);
-      setCoinPrice(coinPrice);
+      ).json();
+      setCoinInfo(coinInfoData);
+      setCoinPrice(coinPriceData);
       setIsLoading(false);
     })();
   }, [coinId]);
@@ -138,7 +138,7 @@ function Coin() {
     <Container>
       <Header>
         <CoinTitle>
-          {state?.name ? state.name : isLoading ? "로딩중..." : info?.name}
+          {state?.name ? state.name : isLoading ? "로딩중..." : coinInfo?.name}
         </CoinTitle>
       </Header>
 
@@ -146,7 +146,21 @@ function Coin() {
         <Loading>로딩중...</Loading>
       ) : (
         <>
-          <Overview></Overview>
+          <Overview>
+            <Overviewitem>
+              <span>Rank:</span>
+              <span>{coinInfo?.rank}</span>
+            </Overviewitem>
+            <Overviewitem>
+              <span>SYMBOL:</span>
+              <span>{coinInfo?.symbol}</span>
+            </Overviewitem>
+            <Overviewitem>
+              <span>OPEN SOUCE:</span>
+              <span>{coinInfo?.open_source}</span>
+            </Overviewitem>
+          </Overview>
+          <Description>{coinInfo?.description}</Description>
         </>
       )}
     </Container>
