@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router";
 import styled from "styled-components";
+import CoinPrice from "./CoinPrice";
+import CoinChart from "./CoinChart";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -24,6 +26,30 @@ const Loading = styled.span`
   font-size: 30px;
   text-align: center;
   display: block;
+`;
+
+const Overview = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+`;
+
+const Overviewitem = styled.div`
+  isplay: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
+
+const Description = styled.p`
+  margin: 20px 0px;
 `;
 
 interface RouteParams {
@@ -93,8 +119,8 @@ function Coin() {
   const [isLoading, setIsLoading] = useState(true);
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
-  const [coinInfo, setCoinInfo] = useState<CoinInfoDataType>({});
-  const [coinPrice, setCoinPrice] = useState<CoinPriceDataType>({});
+  const [coinInfo, setCoinInfo] = useState<CoinInfoDataType>();
+  const [coinPrice, setCoinPrice] = useState<CoinPriceDataType>();
   useEffect(() => {
     (async () => {
       const coinInfoData = await (
@@ -105,14 +131,24 @@ function Coin() {
       ).json;
       setCoinInfo(coinInfo);
       setCoinPrice(coinPrice);
+      setIsLoading(false);
     })();
-  }, []);
+  }, [coinId]);
   return (
     <Container>
       <Header>
-        <CoinTitle>{state?.name || "잘못된 접근입니다."}</CoinTitle>
+        <CoinTitle>
+          {state?.name ? state.name : isLoading ? "로딩중..." : info?.name}
+        </CoinTitle>
       </Header>
-      {isLoading ? <Loading>"코인을 불러오는중..."</Loading> : null}
+
+      {isLoading ? (
+        <Loading>로딩중...</Loading>
+      ) : (
+        <>
+          <Overview></Overview>
+        </>
+      )}
     </Container>
   );
 }
