@@ -37,7 +37,7 @@ const Overview = styled.div`
 `;
 
 const Overviewitem = styled.div`
-  isplay: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   span:first-child {
