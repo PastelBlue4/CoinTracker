@@ -156,7 +156,7 @@ function Coin() {
               <span>{coinInfo?.symbol}</span>
             </Overviewitem>
             <Overviewitem>
-              <span>OPEN SOUCE:</span>
+              <span>OPEN SOUCE: yes: no</span>
               <span>{coinInfo?.open_source}</span>
             </Overviewitem>
           </Overview>
