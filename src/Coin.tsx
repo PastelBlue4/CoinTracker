@@ -138,7 +138,11 @@ function Coin() {
     <Container>
       <Header>
         <CoinTitle>
-          {state?.name ? state.name : isLoading ? "로딩중..." : coinInfo?.name}
+          {state?.name
+            ? state.name
+            : isLoading
+            ? "코인정보 로딩중..."
+            : coinInfo?.name}
         </CoinTitle>
       </Header>
 
