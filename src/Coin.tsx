@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation, Switch, Route } from "react-router";
+import { useParams, useLocation, Routes, Route } from "react-router";
 import styled from "styled-components";
 import CoinPrice from "./CoinPrice";
 import CoinChart from "./CoinChart";
@@ -175,14 +175,14 @@ function Coin() {
               <span>{coinPrice?.max_supply}</span>
             </Overviewitem>
           </Overview>
-          <Switch>
+          <Routes>
             <Route path={`/${coinId}/price`}>
               <CoinPrice />
             </Route>
             <Route path={`/${coinId}/chart`}>
               <CoinChart />
             </Route>
-          </Switch>
+          </Routes>
         </>
       )}
     </Container>

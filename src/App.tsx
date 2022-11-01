@@ -1,6 +1,9 @@
 import React from "react";
-import Router from "./Router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import { createGlobalStyle } from "styled-components";
+import Coin from "./Coin";
+import Coins from "./Coins";
 
 const ResetStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -71,7 +74,13 @@ function App() {
   return (
     <>
       <ResetStyle />
-      <Router />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/:coinId" element={<Coin />} />
+          <Route path="/" element={<Coins />} />
+        </Routes>
+      </BrowserRouter>
+      );
     </>
   );
 }
