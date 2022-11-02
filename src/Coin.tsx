@@ -52,14 +52,12 @@ const Description = styled.p`
   margin: 20px 0px;
 `;
 
-interface RouteParams {
-  coinId: string;
+interface LocationState {
+  state: {
+    name: string;
+    rank: number;
+  };
 }
-
-interface RouteState {
-  name: string;
-}
-
 interface CoinInfoDataType {
   id: string;
   name: string;
@@ -117,8 +115,8 @@ interface CoinPriceDataType {
 
 function Coin() {
   const [isLoading, setIsLoading] = useState(true);
-  const { coinId } = useParams<RouteParams>();
-  const { state } = useLocation<RouteState>();
+  const { coinId } = useParams() as any;
+  const { state } = useLocation() as LocationState;
   const [coinInfo, setCoinInfo] = useState<CoinInfoDataType>();
   const [coinPrice, setCoinPrice] = useState<CoinPriceDataType>();
   useEffect(() => {
