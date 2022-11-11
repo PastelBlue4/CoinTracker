@@ -1,4 +1,6 @@
+import { useQuery } from "react-query";
 import styled from "styled-components";
+import fetchCoins from "./api";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -28,12 +30,27 @@ const Coin = styled.li`
       color: ${(props) => props.theme.accentColor};
     }
   }
-  margintop
-  
 `;
 
 function Coins() {
-  return <div> Coins</div>;
+  interface ICoin {
+    id: string;
+    name: string;
+    symbol: string;
+    rank: number;
+    is_new: boolean;
+    is_active: boolean;
+    type: string;
+  }
+  const { isLoading, data } = useQuery<ICoin[]>("fetchCoins", fetchCoins);
+  console.log(isLoading, data);
+  return (
+    <div>
+      {data?.slice(0, 100).map((item) => (
+        <span>{item.name}</span>
+      ))}
+    </div>
+  );
 }
 
 export default Coins;

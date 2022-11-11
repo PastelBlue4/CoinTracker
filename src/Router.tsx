@@ -1,5 +1,12 @@
+import { Route, Routes } from "react-router-dom";
+import Coins from "./Coins";
+
 const Router = () => {
-  return <div>Router</div>;
+  return (
+    <Routes>
+      <Route path="/coins" element={<Coins />} />
+    </Routes>
+  );
 };
 
 export default Router;

@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import { createGlobalStyle } from "styled-components";
 
@@ -72,9 +73,10 @@ a{
 function App() {
   return (
     <>
-      <ResetStyle />
-      <Router />
-      );
+      <BrowserRouter>
+        <ResetStyle />
+        <Router />
+      </BrowserRouter>
     </>
   );
 }
