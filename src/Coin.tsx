@@ -68,7 +68,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-function Coin() {
+function Coin({ data }) {
   interface RouteParams {
     coinId: string;
   }
@@ -129,7 +129,7 @@ function Coin() {
     };
   }
 
-  return <div> Coin</div>;
+  return <div>{data.name}</div>;
 }
 
 export default Coin;

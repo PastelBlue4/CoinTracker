@@ -47,7 +47,7 @@ function Coins() {
   return (
     <div>
       {data?.slice(0, 100).map((item) => (
-        <span>{item.name}</span>
+        <Coin data={item} />
       ))}
     </div>
   );
