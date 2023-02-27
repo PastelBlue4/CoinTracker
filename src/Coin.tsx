@@ -68,7 +68,19 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-function Coin({ data }) {
+interface ICoin {
+  data: {
+    id: string;
+    name: string;
+    symbol: string;
+    rank: number;
+    is_new: boolean;
+    is_active: boolean;
+    type: string;
+  };
+}
+
+function Coin({ data }: ICoin) {
   interface RouteParams {
     coinId: string;
   }
